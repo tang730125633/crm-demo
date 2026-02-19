@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.db
+venv/
+.env
+output/tests/__pycache__/
+output/backend/__pycache__/
+data/test_*.txt
+data/backend_*.py
+data/tests_*.py
