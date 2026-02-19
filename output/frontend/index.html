@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数据看板 — CRM Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+    .sidebar-link { transition: background 0.15s, color 0.15s; }
+    .stat-card { transition: box-shadow 0.2s, transform 0.2s; }
+    .stat-card:hover { box-shadow: 0 8px 30px rgba(59,130,246,0.12); transform: translateY(-2px); }
+    .progress-bar { transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .fade-in { animation: fadeInUp 0.4s ease both; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<div class="flex min-h-screen">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="w-60 bg-blue-600 text-white flex flex-col fixed top-0 left-0 h-full z-10 shadow-xl">
+    <!-- Logo -->
+    <div class="px-6 py-6 border-b border-blue-500/40">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-base leading-tight">CRM Demo</div>
+          <div class="text-blue-200 text-xs">客户关系管理</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 px-3 py-4 space-y-1">
+      <p class="px-3 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-2">主菜单</p>
+      <a href="index.html" data-nav
+        class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-blue-100 hover:bg-blue-700/60 text-sm font-medium">
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        数据看板
+      </a>
+      <a href="customers.html" data-nav
+        class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-blue-100 hover:bg-blue-700/60 text-sm font-medium">
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        客户管理
+      </a>
+    </nav>
+
+    <!-- Footer -->
+    <div class="px-6 py-4 border-t border-blue-500/40">
+      <div class="flex items-center gap-2 text-blue-200 text-xs">
+        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+        系统正常运行
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="ml-60 flex-1 p-8">
+
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-gray-900">数据看板</h1>
+      <p class="text-gray-500 text-sm mt-1">实时查看客户数据与业务概况</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+
+      <div class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 fade-in" style="animation-delay:0s">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <span class="text-xs text-blue-500 bg-blue-50 px-2 py-1 rounded-full font-medium">总计</span>
+        </div>
+        <div id="stat-total" class="text-3xl font-bold text-gray-900 mb-1">—</div>
+        <div class="text-sm text-gray-500">总客户数</div>
+      </div>
+
+      <div class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 fade-in" style="animation-delay:0.06s">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 bg-green-50 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+            </svg>
+          </div>
+          <span class="text-xs text-green-500 bg-green-50 px-2 py-1 rounded-full font-medium">本月</span>
+        </div>
+        <div id="stat-new" class="text-3xl font-bold text-gray-900 mb-1">—</div>
+        <div class="text-sm text-gray-500">本月新增</div>
+      </div>
+
+      <div class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 fade-in" style="animation-delay:0.12s">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 bg-purple-50 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+          </div>
+          <span class="text-xs text-purple-500 bg-purple-50 px-2 py-1 rounded-full font-medium">累计</span>
+        </div>
+        <div id="stat-followups" class="text-3xl font-bold text-gray-900 mb-1">—</div>
+        <div class="text-sm text-gray-500">跟进记录数</div>
+      </div>
+
+      <div class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 fade-in" style="animation-delay:0.18s">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <span class="text-xs text-emerald-500 bg-emerald-50 px-2 py-1 rounded-full font-medium">成交</span>
+        </div>
+        <div id="stat-closed" class="text-3xl font-bold text-gray-900 mb-1">—</div>
+        <div class="text-sm text-gray-500">成交客户数</div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Row: Status Distribution + Recent Customers -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+      <!-- Status Distribution -->
+      <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 fade-in" style="animation-delay:0.24s">
+        <h2 class="text-base font-semibold text-gray-900 mb-5">客户状态分布</h2>
+        <div id="status-distribution" class="space-y-4">
+          <!-- Filled by JS -->
+          <div class="animate-pulse space-y-4">
+            <div class="h-4 bg-gray-100 rounded"></div>
+            <div class="h-4 bg-gray-100 rounded"></div>
+            <div class="h-4 bg-gray-100 rounded"></div>
+            <div class="h-4 bg-gray-100 rounded"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Customers -->
+      <div class="lg:col-span-3 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 fade-in" style="animation-delay:0.3s">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-base font-semibold text-gray-900">最近添加的客户</h2>
+          <a href="customers.html"
+            class="text-sm text-blue-500 hover:text-blue-700 font-medium flex items-center gap-1">
+            查看全部
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-hidden">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-gray-100">
+                <th class="text-left py-2 px-0 text-xs text-gray-400 font-medium">姓名</th>
+                <th class="text-left py-2 px-0 text-xs text-gray-400 font-medium hidden sm:table-cell">公司</th>
+                <th class="text-left py-2 px-0 text-xs text-gray-400 font-medium">状态</th>
+                <th class="text-right py-2 px-0 text-xs text-gray-400 font-medium">添加时间</th>
+              </tr>
+            </thead>
+            <tbody id="recent-customers">
+              <tr><td colspan="4" class="py-8 text-center text-gray-400 text-sm">加载中...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+<script>
+  async function loadDashboard() {
+    try {
+      const stats = await apiFetch('/api/stats');
+      document.getElementById('stat-total').textContent = stats.total_customers ?? 0;
+      document.getElementById('stat-new').textContent = stats.new_this_month ?? 0;
+      document.getElementById('stat-followups').textContent = stats.follow_up_count ?? 0;
+
+      const breakdown = stats.status_breakdown || {};
+      const closed = breakdown['closed'] || 0;
+      document.getElementById('stat-closed').textContent = closed;
+
+      // Status distribution
+      const total = stats.total_customers || 1;
+      const statuses = [
+        { label: '潜在客户', key: 'potential', color: '#9CA3AF' },
+        { label: '意向客户', key: 'interested', color: '#3B82F6' },
+        { label: '成交客户', key: 'closed', color: '#22C55E' },
+        { label: '流失客户', key: 'lost', color: '#EF4444' },
+      ];
+
+      const distEl = document.getElementById('status-distribution');
+      distEl.innerHTML = statuses.map(s => {
+        const count = breakdown[s.key] || 0;
+        const pct = Math.round((count / total) * 100);
+        return `
+          <div>
+            <div class="flex justify-between text-sm mb-1.5">
+              <span class="font-medium text-gray-700">${s.label}</span>
+              <span class="text-gray-400">${count} 人 · ${pct}%</span>
+            </div>
+            <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-2 rounded-full progress-bar" style="width:0%; background:${s.color}" data-target="${pct}"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Animate bars
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.progress-bar').forEach(bar => {
+          const target = bar.getAttribute('data-target');
+          setTimeout(() => bar.style.width = target + '%', 80);
+        });
+      });
+
+    } catch (err) {
+      console.error('Stats load error:', err);
+    }
+
+    // Recent customers
+    try {
+      const data = await apiFetch('/api/customers?search=&status=');
+      const customers = (data.customers || data || []).slice(0, 5);
+      const tbody = document.getElementById('recent-customers');
+      if (!customers.length) {
+        tbody.innerHTML = '<tr><td colspan="4" class="py-8 text-center text-gray-400 text-sm">暂无客户数据</td></tr>';
+        return;
+      }
+      tbody.innerHTML = customers.map(c => `
+        <tr class="border-b border-gray-50 hover:bg-gray-50/60 transition-colors">
+          <td class="py-3">
+            <a href="customer-detail.html?id=${c.id}"
+              class="font-medium text-gray-900 hover:text-blue-600">${c.name}</a>
+          </td>
+          <td class="py-3 text-gray-500 hidden sm:table-cell">${c.company || '—'}</td>
+          <td class="py-3">${statusBadge(c.status)}</td>
+          <td class="py-3 text-right text-gray-400 text-xs">${formatDate(c.created_at)}</td>
+        </tr>
+      `).join('');
+    } catch (err) {
+      document.getElementById('recent-customers').innerHTML =
+        '<tr><td colspan="4" class="py-8 text-center text-red-400 text-sm">数据加载失败</td></tr>';
+    }
+  }
+
+  loadDashboard();
+</script>
+</body>
+</html>

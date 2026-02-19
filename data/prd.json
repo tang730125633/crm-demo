@@ -1,0 +1,64 @@
+{
+  "project_name": "CRM Demo",
+  "project_root": "/Users/tang/projects/crm-demo",
+  "version": "1.0.0",
+  "description": "轻量级 CRM 客户关系管理系统 Demo，用于展示 Agent 团队完整开发流程",
+  "tech_stack": {
+    "backend": "Python FastAPI",
+    "frontend": "HTML + Tailwind CSS + Vanilla JS",
+    "database": "SQLite",
+    "package_manager": "pip"
+  },
+  "features": [
+    {
+      "id": "F001",
+      "name": "客户管理",
+      "description": "客户的增删改查（CRUD）",
+      "api_endpoints": [
+        "GET /api/customers - 获取客户列表",
+        "POST /api/customers - 新增客户",
+        "GET /api/customers/{id} - 获取单个客户",
+        "PUT /api/customers/{id} - 更新客户",
+        "DELETE /api/customers/{id} - 删除客户"
+      ]
+    },
+    {
+      "id": "F002",
+      "name": "跟进记录",
+      "description": "为客户添加跟进记录",
+      "api_endpoints": [
+        "GET /api/customers/{id}/follow-ups - 获取跟进记录",
+        "POST /api/customers/{id}/follow-ups - 新增跟进记录",
+        "DELETE /api/follow-ups/{id} - 删除跟进记录"
+      ]
+    },
+    {
+      "id": "F003",
+      "name": "数据看板",
+      "description": "展示客户总数、本月新增、跟进统计等",
+      "api_endpoints": [
+        "GET /api/stats - 获取统计数据"
+      ]
+    }
+  ],
+  "data_models": {
+    "Customer": {
+      "id": "integer (auto)",
+      "name": "string (required)",
+      "phone": "string",
+      "email": "string",
+      "company": "string",
+      "status": "string (潜在客户/意向客户/成交客户/流失客户)",
+      "notes": "string",
+      "created_at": "datetime",
+      "updated_at": "datetime"
+    },
+    "FollowUp": {
+      "id": "integer (auto)",
+      "customer_id": "integer (FK)",
+      "content": "string (required)",
+      "follow_type": "string (电话/微信/拜访/邮件)",
+      "created_at": "datetime"
+    }
+  }
+}

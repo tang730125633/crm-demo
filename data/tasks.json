@@ -1,0 +1,47 @@
+{
+  "project_name": "CRM Demo",
+  "project_root": "/Users/tang/projects/crm-demo",
+  "created_at": "2026-02-18T00:00:00Z",
+  "tasks": [
+    {
+      "task_id": "TASK-001",
+      "title": "搭建 FastAPI 后端 + SQLite 数据库",
+      "description": "使用 FastAPI 搭建后端服务，SQLite 作为数据库。实现 Customer 和 FollowUp 两个数据模型，实现完整的 CRUD API 和统计接口。端口使用 8000。",
+      "agent": "backend-dev",
+      "priority": "P0",
+      "dependencies": [],
+      "status": "pending",
+      "output_dir": "output/backend/"
+    },
+    {
+      "task_id": "TASK-002",
+      "title": "开发前端页面",
+      "description": "使用 HTML + Tailwind CSS + 原生 JS 开发前端。包含：1) 数据看板首页（统计卡片）2) 客户列表页（表格+搜索+状态筛选）3) 新增/编辑客户弹窗 4) 客户详情页（含跟进记录）。API 地址为 http://localhost:8000。",
+      "agent": "frontend-dev",
+      "priority": "P0",
+      "dependencies": [],
+      "status": "pending",
+      "output_dir": "output/frontend/"
+    },
+    {
+      "task_id": "TASK-003",
+      "title": "编写并执行 API 测试",
+      "description": "使用 pytest + httpx 对后端 API 进行测试，覆盖客户 CRUD、跟进记录 CRUD、统计接口。",
+      "agent": "tester-agent",
+      "priority": "P1",
+      "dependencies": ["TASK-001"],
+      "status": "pending",
+      "output_dir": "output/tests/"
+    },
+    {
+      "task_id": "TASK-004",
+      "title": "配置启动脚本和依赖",
+      "description": "创建 requirements.txt、启动脚本 start.sh，确保项目能一键启动。同时编写 README.md。",
+      "agent": "devops-agent",
+      "priority": "P1",
+      "dependencies": ["TASK-001", "TASK-002"],
+      "status": "pending",
+      "output_dir": "./"
+    }
+  ]
+}
