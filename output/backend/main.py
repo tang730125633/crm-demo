@@ -53,7 +53,7 @@ if os.path.exists(FRONTEND_DIR):
     app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 
-# ---- 根路径 - 返回前端首页 ----
+# ---- 前端页面路由 ----
 
 @app.get("/")
 def root():
@@ -61,6 +61,18 @@ def root():
     if os.path.exists(index_path):
         return FileResponse(index_path)
     return {"message": "CRM API is running"}
+
+@app.get("/customers.html")
+def customers_page():
+    return FileResponse(os.path.join(FRONTEND_DIR, "customers.html"))
+
+@app.get("/customer-detail.html")
+def customer_detail_page():
+    return FileResponse(os.path.join(FRONTEND_DIR, "customer-detail.html"))
+
+@app.get("/index.html")
+def index_page():
+    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
 
 # ---- 客户 CRUD ----
